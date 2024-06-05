@@ -1,54 +1,41 @@
 import React from 'react';
+import { useState } from 'react';
+import { useParams } from 'react-router';
 import "./Products.scss";
 import List from "../../components/List/List";
+import useFetch from "../../hooks/useFetch";
 
 export default function Products() {
 
   const catId = parseInt(useParams().id);
   const [maxPrice, setMaxPrice] = useState(1000);
   const [sort, setSort] = useState(null);
+  const [selectedSubCats, setSelectedSubCats] = useState([]);
+
+  const {data, loading, error} = useFetch(`/sub-categories?[filters][categories][id][&eq]=${catId}`);
+
+  const handleChange = (e) => {
+    const value = e.target.value;
+    const isChecked = e.target.checked;
+
+    setSelectedSubCats(
+      isChecked 
+        ? [...selectedSubCats, value]
+        : selectedSubCats.filter((item) => item !== value)
+    );
+  };
 
   return (
     <div className='products'>
       <div className="left">
         <div className="filterItem">
           <h2 className="">Product Categories</h2>
-          <div className="inputItem">
-            <input type="checkbox" id='1' value={1} />
-            <label htmlFor="1">Shoes</label>
-          </div>
-          <div className="inputItem">
-            <input type="checkbox" id='2' value={2} />
-            <label htmlFor="2">Accessories</label>
-          </div>
-          <div className="inputItem">
-            <input type="checkbox" id='3' value={3} />
-            <label htmlFor="3">Skirts</label>
-          </div>
-          <div className="inputItem">
-            <input type="checkbox" id='4' value={4} />
-            <label htmlFor="4">Jumpers & Cardigans</label>
-          </div>
-          <div className="inputItem">
-            <input type="checkbox" id='5' value={5} />
-            <label htmlFor="5">Shirts & Blouses</label>
-          </div>
-          <div className="inputItem">
-            <input type="checkbox" id='6' value={6} />
-            <label htmlFor="6">Coats</label>
-          </div>
-          <div className="inputItem">
-            <input type="checkbox" id='7' value={7} />
-            <label htmlFor="7">Dresses</label>
-          </div>
-          <div className="inputItem">
-            <input type="checkbox" id='8' value={8} />
-            <label htmlFor="8">Trousers</label>
-          </div>
-          <div className="inputItem">
-            <input type="checkbox" id='9' value={9} />
-            <label htmlFor="9">Nightwear</label>
-          </div>
+          {data?.map((item) => (
+              <div className="inputItem" key={item.id}>
+                <input type="checkbox" id={item.id} value={item.id} onChange={handleChange}/>
+                <label htmlFor={item.id}>{item.attributes.title}</label>
+              </div>
+          ))}
         </div>
         <div className="filterItem">
             <h2 className="">Filter by price</h2>
