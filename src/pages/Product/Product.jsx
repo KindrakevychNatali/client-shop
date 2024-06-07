@@ -5,7 +5,8 @@ import BalanceIcon from "@mui/icons-material/Balance";
 import useFetch from '../../hooks/useFetch';
 import { useParams } from 'react-router';
 import { useDispatch } from 'react-redux';
-import { addToCart } from '../../../redux/cartReducer';
+import { addToCart } from '../../redux/cartReducer';
+import "./Product.scss";
 
 export default function Product() {
   const id = useParams().id;
@@ -26,16 +27,16 @@ export default function Product() {
           <>
             <div className="left">
               <div className="images">
-                <img src={process.env.REACT_APP_UPLOAD_URL + data?.attributes?.img?.data?.attributes?.url} alt="" className="" onClick={e=>setSelectedImg("img")} />
-                <img src={process.env.REACT_APP_UPLOAD_URL + data?.attributes?.img2?.data?.attributes?.url} alt="" className="" onClick={e=>setSelectedImg("img2")} />
+                <img src={import.meta.env.VITE_APP_UPLOAD_URL + data?.attributes?.img?.data?.attributes?.url} alt="" className="" onClick={e=>setSelectedImg("img")} />
+                <img src={import.meta.env.VITE_APP_UPLOAD_URL + data?.attributes?.img2?.data?.attributes?.url} alt="" className="" onClick={e=>setSelectedImg("img2")} />
               </div>
               <div className="mainImg">
-                  <img src={process.env.REACT_APP_UPLOAD_URL + data?.attributes[selectedImg]?.data?.attributes?.url} alt="" className="" />
+                  <img src={import.meta.env.VITE_APP_UPLOAD_URL + data?.attributes[selectedImg]?.data?.attributes?.url} alt="" className="" />
               </div>
             </div>
             <div className="right">
               <h1 className="">{data?.attributes?.title}</h1>
-              <span className="price">{data?.attributes?.price}</span>
+              <span className="price">{data?.attributes?.price}$</span>
               <p className="">{data?.attributes?.desc}</p>
               <div className="quantity">
                 <button onClick={()=>setQuantity((prev)=>prev === 1 ? 1 : prev - 1)}>-</button>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # Client-Shop
 
@@ -140,3 +141,6 @@ client-shop/
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 ```
+=======
+# Client-Shop
+>>>>>>> dcfe9ae (Refactoring and update components)

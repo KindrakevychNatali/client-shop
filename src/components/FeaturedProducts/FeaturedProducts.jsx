@@ -1,11 +1,12 @@
 import React from 'react';
-import "./FeaturedProducts";
+import "./FeaturedProducts.scss";
 import useFetch from "../../hooks/useFetch";
+import Card from '../Card/Card';
 
 export default function FeaturedProducts({type}) {
   
   const {data, loading, error} = useFetch(
-    `/product?populate=*&[filters][type][$eq]=${type}`
+    `/products?populate=*&[filters][type][$eq]=${type}`
   );
 
     return (

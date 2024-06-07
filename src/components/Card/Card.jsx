@@ -8,8 +8,8 @@ export default function Card({item}) {
          <div className='card'>
              <div className="image">
                 {item?.attributes.isNew && <span>New Season</span>}
-                 <img src={process.env.REACT_APP_UPLOAD_URL+item.attributes.img?.data.attributes.url} alt="" className="mainImg" />
-                 <img src={process.env.REACT_APP_UPLOAD_URL+item.attributes.img2?.data.attributes.url} alt="" className="secondImage" />
+                 <img src={import.meta.env.VITE_APP_UPLOAD_URL+item.attributes.img?.data.attributes.url} alt="" className="mainImg" />
+                 <img src={import.meta.env.VITE_APP_UPLOAD_URL+item.attributes.img2?.data.attributes.url} alt="" className="secondImage" />
              </div>
              <h2 className="">{item?.attributes.title}</h2>
              <div className="prices">
